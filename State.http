@@ -1,0 +1,27 @@
+### CREAR STATE
+
+POST http://localhost:8080/api/states
+Content-Type: application/json
+
+{
+    "stateDescription": "Task is currently being worked on",
+    "stateComment": "In Progress"
+}
+
+### ACTUALIZAR STATE
+
+PUT http://localhost:8080/api/states/2
+Content-Type: application/json
+
+{
+    "stateDescription": "Task is currently being worked on Update",
+    "stateComment": "In Progress Update"
+}
+
+### OBTENER STATE
+
+GET http://localhost:8080/api/states/2
+
+### ELIMINAR STATE
+
+DELETE http://localhost:8080/api/states/2

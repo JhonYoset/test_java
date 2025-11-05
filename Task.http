@@ -1,16 +1,14 @@
 ### CREAR TASK
-
 POST http://localhost:8080/api/tasks
 Content-Type: application/json
 
 {
     "taskTitle": "Task Hola",
     "taskDescription": "Task hola descrippcion ",
-    ""
+    "idState": 1,
+    "userId": 1
 }
-
 ### ACTUALIZAR TASK
-
 PUT http://localhost:8080/api/tasks/1
 Content-Type: application/json
 

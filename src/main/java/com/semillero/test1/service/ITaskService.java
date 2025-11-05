@@ -2,9 +2,10 @@ package com.semillero.test1.service;
 
 import java.util.List;
 
-import com.semillero.test1.commons.iCrudCommons;
-import com.semillero.test1.models.TaskEntity;
+import com.semillero.test1.commons.iCrudCommonsDto;
+import com.semillero.test1.dto.TaskRequestDto;
+import com.semillero.test1.dto.TaskResponseDto;
 
-public interface ITaskService extends iCrudCommons <TaskEntity, Long> {
-    List<TaskEntity> findAll();
+public interface ITaskService extends iCrudCommonsDto <TaskRequestDto, TaskResponseDto, Long> {
+    List<TaskResponseDto> findAll();
 }

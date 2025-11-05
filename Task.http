@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
     "taskTitle": "Task Hola cambio",
-    "taskDescription": "Task hola descripcion"
+    "taskDescription": "Task hola descripcion cambio"
 }
 
 ### OBTENER TASK

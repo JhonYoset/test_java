@@ -35,9 +35,10 @@ public class TaskMapper {
         return TaskResponseDto.builder()
             .idTask(entity.getIdTask())
             .taskTitle(entity.getTaskTitle())
-            .taskDescription(entity.getTaskDescription())
-            .userId(entity.getUserId())
+            .taskDescription(entity.getTaskDescription())            
             .idState(entity.getState() != null ? entity.getState().getIdState() : null)
+            .stateDescription(entity.getState()!=null ? entity.getState().getStateDescription():null)
+            .userId(entity.getUserId())
             .createdAt(entity.getCreatedAt() != null ? entity.getCreatedAt().format(FORMATTER) : null)
             .updatedAt(entity.getUpdatedAt() != null ? entity.getUpdatedAt().format(FORMATTER) : null)
             .build();

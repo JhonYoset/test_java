@@ -10,6 +10,7 @@ public class TaskResponseDto {
     private String taskTitle;
     private String taskDescription;
     private Long idState;
+    private String stateDescription;
     private Long userId;
     private String createdAt;
     private String updatedAt;

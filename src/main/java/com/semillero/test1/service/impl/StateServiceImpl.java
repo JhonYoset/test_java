@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.semillero.test1.dto.StateRequestDto;
 import com.semillero.test1.dto.StateResponseDto;
+import com.semillero.test1.exception.ResourceNotFoundException;
 import com.semillero.test1.mappers.StateMapper;
 import com.semillero.test1.models.StateEntity;
 import com.semillero.test1.repository.IStateRepository;
@@ -28,7 +29,7 @@ public class StateServiceImpl implements IStateService {
 
     @Override
     public StateResponseDto update(Long id, StateRequestDto stateRequestDto) {
-        StateEntity existing = istateRepository.findById(id).orElseThrow(() -> new RuntimeException("State not found with id: " + id)); 
+        StateEntity existing = istateRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("State not found with id: " + id)); 
         StateEntity stateEntity = stateMapper.toEntity(stateRequestDto);
         BeanUtils.copyProperties(stateEntity, existing, "idState", "CreatedAt");
         existing.setUpdatedAt(java.time.LocalDateTime.now());
@@ -38,13 +39,13 @@ public class StateServiceImpl implements IStateService {
 
     @Override
     public StateResponseDto findById(Long id) {
-        StateEntity entity = istateRepository.findById(id).orElseThrow(() -> new RuntimeException("State not found with id: " + id));
+        StateEntity entity = istateRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("State not found with id: " + id));
         return stateMapper.toDto(entity);
     }
 
     @Override
     public StateResponseDto delete(Long id) {
-        StateEntity entity = istateRepository.findById(id).orElseThrow(() -> new RuntimeException("State not found with id: " + id));
+        StateEntity entity = istateRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("State not found with id: " + id));
         istateRepository.delete(entity);
         return stateMapper.toDto(entity);
     }

@@ -1,6 +1,4 @@
 package com.semillero.test1.service.impl;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -16,43 +14,44 @@ import com.semillero.test1.service.IStateService;
 import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
-public class StateServiceImpl implements IStateService{
-    
-    private final IStateRepository iStateRepository;
-    private final StateMapper stateMapper;
-    
-    @Override
-    public StateResponseDto save(StateRequestDto stateRequestDto){
-        StateEntity stateEntity = stateMapper.toEntity(stateRequestDto);
-        StateEntity savedEntity = iStateRepository.save(stateEntity);
+public class StateServiceImpl implements IStateService {
 
+    private final IStateRepository istateRepository;
+    private final StateMapper stateMapper;
+
+    @Override
+    public com.semillero.test1.dto.StateResponseDto save(StateRequestDto dto) {
+        StateEntity entity = stateMapper.toEntity(dto);
+        StateEntity savedEntity = istateRepository.save(entity);
         return stateMapper.toDto(savedEntity);
     }
-    @Override
-    public StateResponseDto update(Long id, StateRequestDto stateRequestDto){
-        StateEntity existing = iStateRepository.findById(id).orElseThrow(()-> new RuntimeException("state not created"));
-        StateEntity stateEntity = stateMapper.toEntity(stateRequestDto);
 
-        BeanUtils.copyProperties(stateEntity, existing, "idState", "createdAt");
-        existing.setUpdatedAt(LocalDateTime.now());
-        StateEntity updatedEntity = iStateRepository.save(existing);
+    @Override
+    public StateResponseDto update(Long id, StateRequestDto stateRequestDto) {
+        StateEntity existing = istateRepository.findById(id).orElseThrow(() -> new RuntimeException("State not found with id: " + id)); 
+        StateEntity stateEntity = stateMapper.toEntity(stateRequestDto);
+        BeanUtils.copyProperties(stateEntity, existing, "idState", "CreatedAt");
+        existing.setUpdatedAt(java.time.LocalDateTime.now());
+        StateEntity updatedEntity = istateRepository.save(existing);
         return stateMapper.toDto(updatedEntity);
     }
+
     @Override
     public StateResponseDto findById(Long id) {
-        StateEntity existing = iStateRepository.findById(id).orElseThrow(()-> new RuntimeException("State not found"));
-        return stateMapper.toDto(existing);
-    }
-    @Override
-    public StateResponseDto  delete(Long id) {
-        StateEntity existing = iStateRepository.findById(id).orElseThrow(()->new RuntimeException("State not found"));
-        iStateRepository.delete(existing);
-        return stateMapper.toDto(existing);
+        StateEntity entity = istateRepository.findById(id).orElseThrow(() -> new RuntimeException("State not found with id: " + id));
+        return stateMapper.toDto(entity);
     }
 
     @Override
-    public List<StateResponseDto> findAll(){
-        List<StateEntity> entities= iStateRepository.findAll();
+    public StateResponseDto delete(Long id) {
+        StateEntity entity = istateRepository.findById(id).orElseThrow(() -> new RuntimeException("State not found with id: " + id));
+        istateRepository.delete(entity);
+        return stateMapper.toDto(entity);
+    }
+
+    @Override
+    public List<StateResponseDto> findAll() {
+        List<StateEntity> entities = istateRepository.findAll();
         return stateMapper.toDtoList(entities);
     }
 }

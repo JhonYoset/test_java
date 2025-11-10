@@ -3,9 +3,9 @@ POST http://localhost:8080/api/tasks
 Content-Type: application/json
 
 {
-    "taskTitle": "Task Hola",
-    "taskDescription": "Task hola descrippcion ",
-    "idState": 1,
+    "taskTitle": "Task nuevo",
+    "taskDescription": "Task nuevo ",
+    "idState": 200,
     "userId": 1
 }
 ### ACTUALIZAR TASK
